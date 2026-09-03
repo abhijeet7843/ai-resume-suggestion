@@ -1,17 +1,13 @@
 import { RouterProvider } from "react-router"
-import { router } from "./app.routes.jsx"
-import { AuthProvider } from "./features/auth/auth.context.jsx"
-import { InterviewProvider } from "./features/interview/interview.context.jsx"
+import { router } from "./routes"
+import { AuthProvider } from "./context/AuthContext"
 
-function App() {
-
-  return (
-    <AuthProvider>
-      <InterviewProvider>
-        <RouterProvider router={router} />
-      </InterviewProvider>
-    </AuthProvider>
-  )
+// AuthProvider wraps everything so any page can read the current user.
+// Interview data is NOT global anymore - each page fetches what it needs.
+export default function App() {
+    return (
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
+    )
 }
-
-export default App
